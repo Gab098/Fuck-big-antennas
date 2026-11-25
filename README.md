@@ -1,57 +1,57 @@
 # Fuck Big Antennas (FBA)
 
-**A connectivity coordination project for Android and community networks.**
+**An independent research project on cellular infrastructure, network security, and alternative connectivity.**
 
-FBA explores how devices can make better use of connectivity that is already available and authorized: Wi-Fi, mobile data, Ethernet/tethering, and community network infrastructure.
+FBA aims to understand how mobile networks provide Internet access, how their components and trust boundaries fit together, and how connectivity can be made more resilient through legitimate, community-operated infrastructure.
 
-> FBA does not bypass carrier authentication, create free mobile data, impersonate SIMs, or access networks without permission. Its goal is to improve visibility, reliability, and handoff between networks the user is allowed to use.
+The Android monitor remains a supporting tool for observing the connectivity available to a device. It is no longer the project's central goal.
 
-## Project status
+## Research pillars
 
-Early prototype / foundation. The Android app currently monitors the system's **default network** and reports its transport and capabilities. It does not yet switch networks, combine links, or run a VPN.
+1. **Cellular architecture** — radio access networks, backhaul, 4G EPC, 5G Core, subscriber identity, authentication, authorization, sessions, routing, roaming, and handover.
+2. **Security research** — threat models, configuration review, protocol study, defensive validation, and responsible reporting in systems we own or are explicitly authorized to test.
+3. **Virtual lab** — isolated mobile-core and simulated-access experiments using synthetic identities and lab-generated traffic.
+4. **Alternative connectivity** — community networks, mesh systems, shared gateways, and multi-WAN designs where access is explicitly authorized.
 
-## First milestone
+## Important distinction
 
-- [x] Establish Android project structure
-- [x] Read the Android default network state
-- [x] Display transport, validation, metering, and connectivity status
-- [ ] Add latency and reachability diagnostics
-- [ ] Add a connection history
-- [ ] Add user-configurable network preferences
-- [ ] Design safe failover behavior
-- [ ] Research multi-WAN tunneling and community-network integration
+Radio visibility is not network access. Knowing a frequency, cell identifier, network name, or protocol does not grant a subscription or permission to use an operator's service. FBA does not aim to bypass carrier authentication or billing, impersonate live cells, intercept private communications, or disrupt radio service.
 
-## Repository layout
+## Repository map
 
 ```text
-android/       Native Android application (Kotlin + Jetpack Compose)
-docs/          Architecture, platform constraints, security, roadmap
+android/       Android connectivity observer (supporting tool)
+docs/
+  architecture.md
+  cellular-network-architecture.md
+  security-research-methodology.md
+  virtual-lab.md
+  android-platform.md
+  security.md
+  roadmap.md
+  research-index.md
 ```
 
-## Build
+## Start here
 
-1. Install Android Studio with Android SDK Platform 35.
-2. Open the `android/` directory in Android Studio.
-3. Allow Gradle sync to finish.
-4. Run the `app` configuration on an Android 8.0+ device or emulator.
+- [Cellular network architecture](docs/cellular-network-architecture.md)
+- [Security research methodology](docs/security-research-methodology.md)
+- [Isolated virtual lab plan](docs/virtual-lab.md)
+- [Project roadmap](docs/roadmap.md)
+- [Research index and references](docs/research-index.md)
 
-The project uses the Gradle wrapper convention, but wrapper scripts/JAR are not committed yet. Android Studio can generate them with **Gradle > Generate Gradle Wrapper** after the first successful Gradle sync, or use a locally installed compatible Gradle distribution.
+## Android observer
 
-## Design principles
+The existing Android prototype reads the system's default network and reports transport and capabilities exposed by Android. It is a diagnostic companion, not a cellular base station, modem controller, VPN, or carrier-access tool.
 
-- **Permission first:** only use networks and interfaces exposed by Android or explicitly administered by the user.
-- **No hidden traffic:** no packet interception or collection of private payloads.
-- **Local-first:** diagnostics and history should work without an FBA account.
-- **Transparent decisions:** explain why a connection is recommended.
-- **Battery-aware:** avoid aggressive continuous probing.
-- **No false promises:** failover is not bonding, and neither creates additional data allowance.
+## Working principles
 
-## Documentation
-
-- [Architecture](docs/architecture.md)
-- [Android platform constraints](docs/android-platform.md)
-- [Security and privacy](docs/security.md)
-- [Roadmap](docs/roadmap.md)
+- Work only on systems we own or have explicit permission to test.
+- Keep cellular experiments virtual or isolated; no public-spectrum transmission.
+- Use synthetic identities and sanitized traces in lab work.
+- Never collect subscriber secrets, personal identifiers, or private payloads.
+- Separate verified facts from hypotheses.
+- Publish defensive findings with evidence and mitigations.
 
 ## License
 
