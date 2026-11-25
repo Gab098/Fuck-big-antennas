@@ -1,47 +1,49 @@
-# Roadmap
+# FBA roadmap
 
-## Phase 0 — Repository foundation
-- [x] Define scope and non-goals
-- [x] Create Android app skeleton
-- [x] Add default-network observer
-- [ ] Add build workflow and project verification
+## Phase 0 — Research foundation
+- [x] Establish repository and Android observer prototype
+- [x] Define cellular architecture research scope
+- [x] Add 4G/5G architecture guide
+- [x] Add defensive security methodology
+- [x] Add isolated virtual lab plan
 
-## Phase 1 — Observability
-- [ ] Show default transport and validation state
-- [ ] Add timestamped connection events
-- [ ] Add bounded HTTPS reachability check
-- [ ] Add latency sampling with battery-aware intervals
-- [ ] Add a diagnostic export with sensitive data excluded
+## Phase 1 — Understand the network
+- [ ] Produce a 4G EPC component diagram
+- [ ] Produce a 5G Core component diagram
+- [ ] Explain control plane vs user plane
+- [ ] Document discovery, authentication, authorization, session setup, and routing as separate stages
+- [ ] Build a glossary of cellular and IP networking terms
+- [ ] Add links to primary standards and project documentation
 
-## Phase 2 — Decision support
-- [ ] User preferences (metered data, preferred transport)
-- [ ] Transparent connection scoring
-- [ ] Recommendation explanations
-- [ ] Manual refresh and pause controls
+## Phase 2 — Build the virtual lab
+- [ ] Select compatible versions of Open5GS, srsRAN, and/or UERANSIM
+- [ ] Document host requirements and isolated network topology
+- [ ] Deploy a core-only virtual environment
+- [ ] Use synthetic subscriber data
+- [ ] Add simulated access in a fully virtual lab
+- [ ] Capture and annotate lab-generated traces
 
-## Phase 3 — Supported handoff
-- [ ] Research Android network request APIs
-- [ ] Prototype user-approved network selection
-- [ ] Test behavior across Android versions and OEMs
-- [ ] Document limitations for existing app connections
+## Phase 3 — Defensive security research
+- [ ] Create a threat model for the virtual lab
+- [ ] Review management-plane isolation
+- [ ] Review credentials, certificates, and secrets handling
+- [ ] Review logs for sensitive data leakage
+- [ ] Test failure recovery and service isolation
+- [ ] Publish findings with mitigations and retest evidence
 
-## Phase 4 — Multi-link research
-- [ ] Compare Multipath TCP, multipath QUIC, and VPN-based aggregation
-- [ ] Design a user-controlled gateway
-- [ ] Evaluate server costs, privacy, and failure modes
-- [ ] Prototype only with links and endpoints controlled by the tester
+## Phase 4 — Connectivity beyond traditional carriers
+- [ ] Compare community network architectures
+- [ ] Study mesh routing and gateway limitations
+- [ ] Study OpenWrt multi-WAN failover and load balancing
+- [ ] Compare MPTCP, multipath QUIC, and VPN-based aggregation
+- [ ] Prototype only with links and endpoints controlled by the project
 
-## Phase 5 — Community connectivity
-- [ ] Document community-network models
-- [ ] Explore OpenWrt integration
-- [ ] Explore mesh status discovery
-- [ ] Keep mesh messaging, local networking, and Internet uplink clearly distinct
+## Phase 5 — Android observer as a field instrument
+- [ ] Add privacy-preserving connection history
+- [ ] Add bounded HTTPS reachability diagnostics
+- [ ] Compare Android-reported transport with measured Internet reachability
+- [ ] Export sanitized diagnostic reports
 
 ## Definition of done
 
-A feature is complete only when it has:
-1. documented permissions and platform requirements;
-2. tests or reproducible manual test steps;
-3. clear failure behavior;
-4. no unsupported security or performance claims;
-5. a privacy review.
+Every practical experiment must have a documented scope, reproducible environment, synthetic or authorized data, expected result, failure behavior, and defensive conclusion. No result should be described as a vulnerability without evidence and a realistic threat model.
