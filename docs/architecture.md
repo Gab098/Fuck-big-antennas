@@ -1,72 +1,53 @@
-# Architecture
+# Project architecture
 
-## Current scope
+## Mission
 
-The first Android milestone is an observability application. It reads the system's default network and presents information Android exposes through `ConnectivityManager` and `NetworkCapabilities`.
+FBA is a telecom research repository with four connected work areas:
 
-It is deliberately not a VPN, packet tunnel, carrier client, or radio access network.
+1. Cellular architecture research.
+2. Defensive security methodology.
+3. An isolated virtual mobile-network lab.
+4. Supporting tools for observing connectivity and alternative networks.
 
-## Planned components
+## Research layers
 
-### 1. Network observer
+### Cellular system map
 
-Responsibilities:
-- Observe default-network availability and changes.
-- Read transport type (Wi-Fi, cellular, Ethernet, VPN, or other).
-- Read whether Android considers the network validated for Internet access.
-- Read whether the network is metered.
-- Publish immutable snapshots to the UI.
+Study the path from user equipment through radio access, transport/backhaul, mobile core, and external data networks. Keep control-plane functions distinct from user-plane forwarding.
 
-### 2. Diagnostics
+### Security and trust model
 
-Future responsibilities:
-- Measure DNS resolution and HTTPS reachability against configurable, reputable endpoints.
-- Measure latency with bounded timeouts.
-- Track failures and recovery.
-- Avoid collecting packet contents, browsing history, or credentials.
+Map ownership, trust boundaries, identities, authentication, authorization, policy, management interfaces, and data flows. Security work must be scoped to FBA-owned or explicitly authorized systems.
 
-### 3. Policy engine
+### Virtual lab
 
-Future responsibilities:
-- Rank available, authorized connections using user-defined priorities.
-- Consider validation, metering, latency, stability, and user data limits.
-- Explain recommendations instead of silently changing connectivity.
-- Respect Android's network-selection APIs and platform restrictions.
+Use virtual network functions and simulators with synthetic identities and lab-generated traffic. The initial lab has no radio transmission and no connection to commercial carrier infrastructure.
 
-### 4. Handoff
+### Alternative connectivity
 
-Future responsibilities:
-- Detect when the default network changes.
-- Explain likely application impact.
-- Investigate supported Android APIs for requesting a particular network.
-- Never promise seamless migration for sockets that are already bound to a previous network.
+Study community networks, mesh routing, shared gateways, multi-WAN failover, load balancing, and multipath transports. A mesh or multiple interfaces do not independently create an Internet uplink or carrier entitlement.
 
-### 5. Optional multi-link gateway
+## Android observer
 
-A later, separate research track may evaluate multipath transport through an endpoint controlled by the user. Multiple access links do not automatically become one faster connection: a cooperating remote endpoint and a suitable transport protocol are generally required.
+The existing Android app is a supporting field instrument. It reads the default network and capabilities exposed by Android's public APIs. It cannot inspect the operator's core network, read SIM secrets, or control all modem behavior.
 
-## Data flow
+## Data and privacy
+
+Research artifacts should use synthetic or sanitized data. Do not store subscriber identifiers, SIM secrets, private packet payloads, personal browsing history, or precise location.
+
+## Repository structure
 
 ```text
-Android ConnectivityManager
-          |
-          v
-   NetworkMonitor
-          |
-          v
-   StateFlow<NetworkSnapshot>
-          |
-          v
-  Compose status screen
+android/       Supporting Android connectivity observer
+docs/          Architecture, methodology, lab plan, references
 ```
 
-## Snapshot model
+## Research output
 
-A snapshot should contain only operational metadata:
-- transport label
-- Internet capability
-- validation state
-- metered state
-- observation timestamp
-
-Do not store subscriber identifiers, SIM secrets, packet payloads, or precise location.
+A completed research item should include:
+- the question being investigated;
+- authoritative references;
+- a diagram or concise explanation;
+- assumptions and limitations;
+- a reproducible lab method where relevant;
+- a defensive conclusion.
